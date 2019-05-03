@@ -1,0 +1,38 @@
+package com.mobile.rogue;
+
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class RogueL extends ApplicationAdapter {
+	SpriteBatch batch;
+	Texture img;
+	private int largura,altura;
+
+	
+	@Override
+	public void create () {
+		batch = new SpriteBatch();
+		img = new Texture("bonecoE2.png");
+
+		largura = Gdx.graphics.getWidth()/100;
+		altura = Gdx.graphics.getHeight()/100;
+	}
+
+	@Override
+	public void render () {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+		batch.draw(img, largura*5, altura*20,largura*20,altura*37);
+		batch.end();
+	}
+	
+	@Override
+	public void dispose () {
+		batch.dispose();
+		img.dispose();
+	}
+}
