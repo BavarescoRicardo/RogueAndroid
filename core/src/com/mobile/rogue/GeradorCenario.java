@@ -32,27 +32,26 @@ public class GeradorCenario {
          while (ocupadoL < 2*totalL){
             ocupadoL += playerLarg+posX+randLarg;
 
-             posX = (int) (Math.random()*(1) +randLarg+posX);
-             posY = (int) (Math.random()*(playerAlt*3)+playerAlt);
-
+             posX = (int) (Math.random()*(1) +randLarg+posX+playerLarg);
+             posY = (int) (Math.random()*(altura*20)+playerAlt);
 
              randLarg = 0;
-            randAlt = 0;
+             randAlt = 0;
 
-            randLarg = (int) (Math.random()*(largura*50) + (playerLarg*2) );
-            randAlt = (int) (Math.random()*(altura*6) + (playerAlt/3) );
-
-
-            // inserir bloco
-            listaBloco.add(new Plataforma(posX,posY,randLarg,randAlt));
-            ocupadoL += randLarg+posX;
-            // array para blocos
-            // grupo de array para cada fase um "estilo" de blocos
+             randLarg = (int) (Math.random()*(largura*50) + (playerLarg*2) );
+             randAlt = (int) (Math.random()*(altura*6) + (playerAlt/3) );
 
 
+             // inserir bloco
+             listaBloco.add(new Plataforma(posX,posY,randLarg,randAlt));
+             ocupadoL += randLarg+posX;
+             // array para blocos
+             // grupo de array para cada fase um "estilo" de blocos
 
 
-            // array para inimigos
+
+
+             // array para inimigos
          }
 
 

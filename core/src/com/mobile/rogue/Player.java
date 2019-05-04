@@ -35,7 +35,7 @@ public class Player {
     // metodos get e set
 
     public Rectangle getBounds(){
-        return new Rectangle();
+        return new Rectangle(x,y,largura,altura);
     }
 
     public int getX() {
@@ -162,8 +162,12 @@ public class Player {
 
     }
 
+    public void levaDado(int dano){
+        this.hp -= dano;
+    }
+
     public void desce(){
-        y -= altura*2;
+        y -= altura/10;
     }
 
     private class Move extends Thread{
@@ -179,7 +183,7 @@ public class Player {
                 }
 
                 try {
-                    Thread.sleep(40);
+                    Thread.sleep(20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
