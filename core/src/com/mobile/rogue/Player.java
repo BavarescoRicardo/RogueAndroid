@@ -1,26 +1,36 @@
 package com.mobile.rogue;
 
 import com.badlogic.gdx.graphics.Texture;
-
-import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Player {
-    private int x,y,largura,altura,telaX,telaY,hp,mana,lado,passo;
+    private int x,y,largura,altura,telaX,telaY,hp,mana,lado,passo,direcao;
     private Texture img,bonecoD1,bonecoD2,bonecoE1,bonecoE2,bonecoE3,bonecoD3;
-    private boolean vivo,pulando,caindo,pexou;
-
+    private boolean vivo,pulando,caindo,pexou,visivel;
+    private Move move;
 
     public Player(int x, int y, int largura, int altura) {
-        this.x = x;
-        this.y = y;
+        this.x = x*5;
+        this.y = y*15;
         this.largura = largura;
         this.altura = altura;
-        this.hp = 1000;
+
+        move = new Move();
+        move.start();
+
+        this.direcao = 1;
         this.vivo = true;
+        this.hp = 100;
+        this.mana = 100;
+        this.pulando = false;
+        this.caindo = true;
+
+        this.bonecoE1 = new Texture("bonecoE1.png");
+        // incluir demais texturas
+
+
+        img = bonecoE1;
     }
-
-
 
     // metodos get e set
 
@@ -112,58 +122,6 @@ public class Player {
         return img;
     }
 
-    public void setImg(Texture img) {
-        this.img = img;
-    }
-
-    public Texture getBonecoD1() {
-        return bonecoD1;
-    }
-
-    public void setBonecoD1(Texture bonecoD1) {
-        this.bonecoD1 = bonecoD1;
-    }
-
-    public Texture getBonecoD2() {
-        return bonecoD2;
-    }
-
-    public void setBonecoD2(Texture bonecoD2) {
-        this.bonecoD2 = bonecoD2;
-    }
-
-    public Texture getBonecoE1() {
-        return bonecoE1;
-    }
-
-    public void setBonecoE1(Texture bonecoE1) {
-        this.bonecoE1 = bonecoE1;
-    }
-
-    public Texture getBonecoE2() {
-        return bonecoE2;
-    }
-
-    public void setBonecoE2(Texture bonecoE2) {
-        this.bonecoE2 = bonecoE2;
-    }
-
-    public Texture getBonecoE3() {
-        return bonecoE3;
-    }
-
-    public void setBonecoE3(Texture bonecoE3) {
-        this.bonecoE3 = bonecoE3;
-    }
-
-    public Texture getBonecoD3() {
-        return bonecoD3;
-    }
-
-    public void setBonecoD3(Texture bonecoD3) {
-        this.bonecoD3 = bonecoD3;
-    }
-
     public boolean isVivo() {
         return vivo;
     }
@@ -195,4 +153,38 @@ public class Player {
     public void setPexou(boolean pexou) {
         this.pexou = pexou;
     }
+
+    // metodos e classe para movimentar o personagem
+
+
+
+    public void anda(int lado){
+
+    }
+
+    public void desce(){
+        y -= altura*2;
+    }
+
+    private class Move extends Thread{
+
+        @Override
+        public void run(){
+            while(vivo){
+
+                anda(lado);
+
+                if (caindo){
+                    desce();
+                }
+
+                try {
+                    Thread.sleep(40);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
