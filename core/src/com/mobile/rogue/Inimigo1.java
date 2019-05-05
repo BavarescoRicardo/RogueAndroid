@@ -35,7 +35,7 @@ public class Inimigo1 {
         // metodos get e set
 
         public Rectangle getBounds(){
-            return new Rectangle(x,y,largura,altura);
+            return new Rectangle(x,y,largura/2,altura/4);
         }
 
         public int getX() {
