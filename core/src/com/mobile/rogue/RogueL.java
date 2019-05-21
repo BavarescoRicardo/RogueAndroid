@@ -40,13 +40,14 @@ public class RogueL extends ApplicationAdapter {
 		altura = Gdx.graphics.getHeight()/100;
 		batch = new SpriteBatch();
 		etapa = 0;
-		player = new Player(largura*5,altura*120,largura*12,altura*22);
+		player = new Player(largura*5,altura*120,largura*10,altura*19);
 
 		geraPlataformas();
 		img = new Texture("bonecoE1.png");
 
 
 		botoes();
+		player.setY(altura*120);
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class RogueL extends ApplicationAdapter {
 
 		// desenha cenario
 		for (Plataforma bloco : geradorCenario.getListaBloco() ){
-			batch.draw(bloco.getImg(),bloco.getX(),bloco.getY(),bloco.getLargura(),bloco.getAltura());
+			batch.draw(bloco.getImg(),bloco.getX()+player.getTelaX(),bloco.getY(),bloco.getLargura(),bloco.getAltura());
 		}
 
 		colisoes();
@@ -70,13 +71,14 @@ public class RogueL extends ApplicationAdapter {
 			geraPlataformas();
 			player.setY(altura*100);
 			player.setX(largura);
+			player.setTelaX(0);
 			etapa++;
 		}
 
 
 		// confere se esta na segunda etapa e desenha inimigo
 
-		if (etapa > 0 && listaInimigos.size() > 0){
+		if (listaInimigos.size() > 0){
 			for (int  inimigo = 0; inimigo < listaInimigos.size(); inimigo ++){
 				batch.draw(listaInimigos.get(inimigo).getImg(),listaInimigos.get(inimigo).getX(),listaInimigos.get(inimigo).getY(),listaInimigos.get(inimigo).getLargura(),listaInimigos.get(inimigo).getAltura());
 			}
@@ -140,6 +142,7 @@ public class RogueL extends ApplicationAdapter {
 			@Override
 			public boolean touchDown(InputEvent e, float x, float y, int point, int button){
 				player.setLado(2);
+
 				return true;
 			}
 			@Override
@@ -159,7 +162,8 @@ public class RogueL extends ApplicationAdapter {
 			@Override
 			public boolean touchDown(InputEvent e, float x, float y, int point, int button){
 				player.setLado(1);
-				return true;
+
+					return true;
 			}
 			@Override
 			public void touchUp(InputEvent e,float x, float y,int point,int button){
@@ -204,8 +208,12 @@ public class RogueL extends ApplicationAdapter {
 			}
 		}
 
-		// gravidade do inimigo
+		// gravidade do inimigo soma movimento da tela ao x para inimigo
 		for ( int inimigo = 0 ; inimigo < listaInimigos.size(); inimigo ++){
+
+				// mudar aqui abaixo
+			 listaInimigos.get(inimigo).setTelaX(player.getTelaX());
+
 			listaInimigos.get(inimigo).setCaindo(true);
 			for (int plataforma = 0; plataforma < geradorCenario.getListaBloco().size(); plataforma ++){
 

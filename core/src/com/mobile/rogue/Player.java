@@ -23,6 +23,8 @@ public class Player {
         //pula.start();
 
         this.direcao = 1;
+        this.telaX = 0;
+        this.telaY = 0;
         this.vivo = true;
         this.hp = 100;
         this.mana = 100;
@@ -46,11 +48,13 @@ public class Player {
     public void anda(int lado){
         switch (lado){
             case 2:
-                x+=largura/20;
+                x += largura/20;
+                telaX -= largura/40;
                 break;
 
             case 1:
                 x -= largura/20;
+                telaX += largura/40;
                 break;
 
             default:
@@ -70,11 +74,11 @@ public class Player {
                     this.img = bonecoE1;
                     break;
 
-                case 4:
+                case 5:
                     this.img = bonecoE2;
                     break;
 
-                case 8:
+                case 10:
                     this.img = bonecoE3;
                     break;
 
@@ -89,11 +93,11 @@ public class Player {
                     this.img = bonecoD1;
                     break;
 
-                case 4:
+                case 5:
                     this.img = bonecoD2;
                     break;
 
-                case 8:
+                case 10:
                     this.img = bonecoD3;
                     break;
 
@@ -104,7 +108,7 @@ public class Player {
 
         passo ++;
 
-        if (passo > 12)
+        if (passo > 15)
             passo = 0;
     }
 
@@ -187,7 +191,8 @@ public class Player {
 
     public Rectangle getBounds(){
 
-        return new Rectangle(x+(largura/4),y,largura/3,altura/4);
+        return new Rectangle(x+(largura/4)-
+                telaX,y,largura/3,altura/4);
     }
 
     public int getX() {

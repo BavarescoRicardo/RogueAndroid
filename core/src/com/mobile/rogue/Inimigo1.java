@@ -39,7 +39,7 @@ public class Inimigo1 {
         }
 
         public int getX() {
-            return x;
+            return x+telaX;
         }
 
         public void setX(int x) {
@@ -154,13 +154,7 @@ public class Inimigo1 {
             this.pexou = pexou;
         }
 
-        // metodos e classe para movimentar o personagem
 
-
-
-        public void anda(int lado){
-
-        }
 
         public void levaDado(int dano){
             this.hp -= dano;
@@ -176,7 +170,6 @@ private class Move extends Thread{
     public void run(){
         while(vivo){
 
-            anda(lado);
 
             if (caindo){
                 desce();

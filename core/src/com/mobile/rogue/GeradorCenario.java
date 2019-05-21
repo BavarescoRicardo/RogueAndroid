@@ -29,7 +29,7 @@ public class GeradorCenario {
         int totalL = largura*100,totalA = altura*100;
 
 
-         while (ocupadoL < 2*totalL){
+         while (ocupadoL < 3*totalL){
             ocupadoL += playerLarg+posX+randLarg;
 
              posX = (int) (Math.random()*(1) +randLarg+posX+playerLarg);
@@ -39,7 +39,7 @@ public class GeradorCenario {
              randAlt = 0;
 
              randLarg = (int) (Math.random()*(largura*50) + (playerLarg*2) );
-             randAlt = (int) (Math.random()*(altura*6) + (playerAlt/3) );
+             randAlt = (int) (Math.random()*(altura*5) + (playerAlt/3) );
 
 
              // inserir bloco
